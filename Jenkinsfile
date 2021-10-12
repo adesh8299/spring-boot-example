@@ -1,30 +1,21 @@
-pipeline{
-    agent{
-        label "master"
+pipeline {
+    agent {
+        label 'master'
     }
-    tools { 
-        maven 'maven' 
-        jdk 'jdk 11'
-    }
-    stages{
-        stage("building"){
-            steps{
+    stages {
+        stage("Production") {
+            steps {
+                //echo "Production branch"
                 sh "mvn clean package"
             }
         }
-
     }
-    post{
-        always{
-            mail to: 'adesh.shukla@knoldus.com',
-			subject: "Pipeline: ${currentBuild.fullDisplayName} is ${currentBuild.currentResult}",
-			body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
+    post {
+         success {
+            echo "Packaging successful"
         }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
+        failure {
+            echo "Packaging unsuccessful"
         }
     }
 }
