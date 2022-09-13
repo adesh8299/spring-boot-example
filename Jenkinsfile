@@ -4,7 +4,7 @@ pipeline{
   stage('test') {
     steps {
       withMaven(globalMavenSettingsConfig: 'null', jdk: 'java', maven: 'maven', mavenSettingsConfig: 'null') {
-      sh 'mvn clean test -s mvn-settings.xml'
+      sh 'mvn clean install -s mvn-settings.xml'
 }
     }
   }
