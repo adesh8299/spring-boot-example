@@ -3,7 +3,7 @@ pipeline{
   stages {
   stage('test') {
     steps {
-      withMaven(gglobalMavenSettingsConfig: 'null', jdk: 'null', maven: 'maven', mavenSettingsConfig: 'null') {
+      withMaven(globalMavenSettingsConfig: 'null', jdk: 'null', maven: 'maven', mavenSettingsConfig: 'null') {
       sh 'mvn clean test'
 }
     }
